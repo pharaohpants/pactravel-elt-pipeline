@@ -2,26 +2,73 @@ version: 2
 
 models:
   - name: dim_date
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [date_key]
     columns:
       - name: date_key
+        data_type: integer
         tests:
           - not_null
           - unique
       - name: full_date
+        data_type: date
         tests:
           - not_null
           - unique
+      - name: year
+        data_type: integer
+      - name: quarter
+        data_type: integer
+      - name: month
+        data_type: integer
+      - name: month_name
+        data_type: text
+      - name: day
+        data_type: integer
+      - name: day_name
+        data_type: text
+      - name: is_weekend
+        data_type: boolean
 
   - name: dim_customers
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [customer_sk]
     columns:
       - name: customer_sk
+        data_type: text
         tests:
           - not_null
           - unique
       - name: customer_id
+        data_type: bigint
         tests:
           - not_null
+      - name: customer_first_name
+        data_type: text
+      - name: customer_family_name
+        data_type: text
+      - name: customer_gender
+        data_type: text
+      - name: customer_birth_date
+        data_type: date
+      - name: customer_country
+        data_type: text
+      - name: customer_phone_number
+        data_type: bigint
+      - name: effective_start
+        data_type: timestamp
+      - name: effective_end
+        data_type: timestamp
       - name: is_current
+        data_type: boolean
         tests:
           - not_null
           - accepted_values:
@@ -29,29 +76,91 @@ models:
                 values: [true, false]
 
   - name: dim_aircrafts
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [aircraft_id]
     columns:
       - name: aircraft_id
+        data_type: text
         tests:
           - not_null
           - unique
+      - name: aircraft_name
+        data_type: text
+      - name: aircraft_iata
+        data_type: text
+      - name: aircraft_icao
+        data_type: text
 
   - name: dim_airlines
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [airline_id]
     columns:
       - name: airline_id
+        data_type: bigint
         tests:
           - not_null
           - unique
+      - name: airline_name
+        data_type: text
+      - name: country
+        data_type: text
+      - name: airline_iata
+        data_type: text
+      - name: airline_icao
+        data_type: text
+      - name: alias
+        data_type: text
 
   - name: dim_airports
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [airport_id]
     columns:
       - name: airport_id
+        data_type: bigint
         tests:
           - not_null
           - unique
+      - name: airport_name
+        data_type: text
+      - name: city
+        data_type: text
+      - name: latitude
+        data_type: double precision
+      - name: longitude
+        data_type: double precision
 
   - name: dim_hotel
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [hotel_id]
     columns:
       - name: hotel_id
+        data_type: bigint
         tests:
           - not_null
           - unique
+      - name: hotel_name
+        data_type: text
+      - name: hotel_address
+        data_type: text
+      - name: city
+        data_type: text
+      - name: country
+        data_type: text
+      - name: hotel_score
+        data_type: numeric(3,1)

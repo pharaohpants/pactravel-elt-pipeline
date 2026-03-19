@@ -2,12 +2,50 @@ version: 2
 
 models:
   - name: fct_flight_bookings
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [booking_sk]
+      - type: foreign_key
+        columns: [date_key]
+        to: ref('dim_date')
+        to_columns: [date_key]
+      - type: foreign_key
+        columns: [customer_sk]
+        to: ref('dim_customers')
+        to_columns: [customer_sk]
+      - type: foreign_key
+        columns: [origin_airport_id]
+        to: ref('dim_airports')
+        to_columns: [airport_id]
+      - type: foreign_key
+        columns: [dest_airport_id]
+        to: ref('dim_airports')
+        to_columns: [airport_id]
+      - type: foreign_key
+        columns: [airline_id]
+        to: ref('dim_airlines')
+        to_columns: [airline_id]
+      - type: foreign_key
+        columns: [aircraft_id]
+        to: ref('dim_aircrafts')
+        to_columns: [aircraft_id]
     columns:
       - name: booking_sk
+        data_type: text
         tests:
           - not_null
           - unique
+      - name: trip_id
+        data_type: bigint
+      - name: flight_number
+        data_type: text
+      - name: seat_number
+        data_type: text
       - name: date_key
+        data_type: integer
         tests:
           - not_null
           - relationships:
@@ -15,43 +53,80 @@ models:
                 to: ref('dim_date')
                 field: date_key
       - name: customer_sk
+        data_type: text
         tests:
           - relationships:
               arguments:
                 to: ref('dim_customers')
                 field: customer_sk
       - name: origin_airport_id
+        data_type: bigint
         tests:
           - relationships:
               arguments:
                 to: ref('dim_airports')
                 field: airport_id
       - name: dest_airport_id
+        data_type: bigint
         tests:
           - relationships:
               arguments:
                 to: ref('dim_airports')
                 field: airport_id
       - name: airline_id
+        data_type: bigint
         tests:
           - relationships:
               arguments:
                 to: ref('dim_airlines')
                 field: airline_id
       - name: aircraft_id
+        data_type: text
         tests:
           - relationships:
               arguments:
                 to: ref('dim_aircrafts')
                 field: aircraft_id
+      - name: travel_class
+        data_type: text
+      - name: flight_duration
+        data_type: text
+      - name: ticket_price
+        data_type: numeric(12,2)
 
   - name: fct_hotel_bookings
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [trip_id]
+      - type: foreign_key
+        columns: [check_in_date_key]
+        to: ref('dim_date')
+        to_columns: [date_key]
+      - type: foreign_key
+        columns: [check_out_date_key]
+        to: ref('dim_date')
+        to_columns: [date_key]
+      - type: foreign_key
+        columns: [customer_sk]
+        to: ref('dim_customers')
+        to_columns: [customer_sk]
+      - type: foreign_key
+        columns: [hotel_id]
+        to: ref('dim_hotel')
+        to_columns: [hotel_id]
     columns:
       - name: trip_id
+        data_type: bigint
         tests:
           - not_null
           - unique
+      - name: customer_sk
+        data_type: text
       - name: check_in_date_key
+        data_type: integer
         tests:
           - not_null
           - relationships:
@@ -59,35 +134,77 @@ models:
                 to: ref('dim_date')
                 field: date_key
       - name: check_out_date_key
+        data_type: integer
         tests:
           - not_null
           - relationships:
               arguments:
                 to: ref('dim_date')
                 field: date_key
-      - name: customer_sk
-        tests:
-          - relationships:
-              arguments:
-                to: ref('dim_customers')
-                field: customer_sk
       - name: hotel_id
+        data_type: bigint
         tests:
           - relationships:
               arguments:
                 to: ref('dim_hotel')
                 field: hotel_id
+      - name: total_price
+        data_type: numeric(12,2)
+      - name: breakfast_included
+        data_type: boolean
 
   - name: fct_daily_flights_summary
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [date_key]
+      - type: foreign_key
+        columns: [date_key]
+        to: ref('dim_date')
+        to_columns: [date_key]
     columns:
       - name: date_key
+        data_type: integer
         tests:
           - not_null
           - unique
+      - name: full_date
+        data_type: date
+      - name: total_bookings
+        data_type: bigint
+      - name: total_revenue
+        data_type: numeric(38,2)
+      - name: avg_ticket_price
+        data_type: numeric(38,6)
+      - name: unique_customers
+        data_type: bigint
 
   - name: fct_daily_hotels_summary
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [date_key]
+      - type: foreign_key
+        columns: [date_key]
+        to: ref('dim_date')
+        to_columns: [date_key]
     columns:
       - name: date_key
+        data_type: integer
         tests:
           - not_null
           - unique
+      - name: full_date
+        data_type: date
+      - name: total_bookings
+        data_type: bigint
+      - name: total_revenue
+        data_type: numeric(38,2)
+      - name: avg_total_price
+        data_type: numeric(38,6)
+      - name: unique_customers
+        data_type: bigint

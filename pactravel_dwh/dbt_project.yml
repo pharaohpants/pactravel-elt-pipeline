@@ -24,6 +24,8 @@ models:
     dimension:
       +materialized: table
       +schema: final
+      +on_schema_change: fail
     fact:
       +materialized: incremental
       +schema: final
+      +on_schema_change: fail

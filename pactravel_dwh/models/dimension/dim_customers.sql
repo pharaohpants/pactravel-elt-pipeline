@@ -42,7 +42,7 @@ SELECT
   s.customer_birth_date,
   s.customer_country,
   s.customer_phone_number,
-  CURRENT_TIMESTAMP         AS effective_start,
+  CURRENT_TIMESTAMP::timestamp AS effective_start,
   '9999-12-31'::timestamp   AS effective_end,
   TRUE                      AS is_current
 FROM src s
@@ -88,7 +88,7 @@ FROM src s
     c.customer_country,
     c.customer_phone_number,
     c.effective_start,
-    CURRENT_TIMESTAMP       AS effective_end,
+    CURRENT_TIMESTAMP::timestamp AS effective_end,
     FALSE                   AS is_current
   FROM curr c
   JOIN changed_or_new d
@@ -105,7 +105,7 @@ FROM src s
     d.customer_birth_date,
     d.customer_country,
     d.customer_phone_number,
-    CURRENT_TIMESTAMP       AS effective_start,
+    CURRENT_TIMESTAMP::timestamp AS effective_start,
     '9999-12-31'::timestamp AS effective_end,
     TRUE                    AS is_current
   FROM changed_or_new d
