@@ -1,2 +1,32 @@
+# Environment and secrets
 .env
-venv
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache/artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Logs
+*.log
+logs/
+pipeline/logs/
+
+# dbt generated artifacts
+pactravel_dwh/target/
+pactravel_dwh/dbt_packages/
+pactravel_dwh/logs/
+pactravel_dwh/dbt_internal_packages/
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

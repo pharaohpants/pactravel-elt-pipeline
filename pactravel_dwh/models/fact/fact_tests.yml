@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: fct_flight_bookings
+    columns:
+      - name: booking_sk
+        tests:
+          - not_null
+          - unique
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: customer_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
+      - name: origin_airport_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_airports')
+                field: airport_id
+      - name: dest_airport_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_airports')
+                field: airport_id
+      - name: airline_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_airlines')
+                field: airline_id
+      - name: aircraft_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_aircrafts')
+                field: aircraft_id
+
+  - name: fct_hotel_bookings
+    columns:
+      - name: trip_id
+        tests:
+          - not_null
+          - unique
+      - name: check_in_date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: check_out_date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: customer_sk
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_sk
+      - name: hotel_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_hotel')
+                field: hotel_id
+
+  - name: fct_daily_flights_summary
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_daily_hotels_summary
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique

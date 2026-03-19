@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: staging
+    schema: staging
+    tables:
+      - name: flight_bookings
+      - name: hotel_bookings
+      - name: customers
+      - name: aircrafts
+      - name: airlines
+      - name: airports
+      - name: hotel
