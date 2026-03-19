@@ -77,7 +77,6 @@ Strategi SCD pada dim_customers:
 3. Versi lama ditutup dengan is_current = false.
 
 ### ERD and Model Diagram
-[BUKTI WAJIB]
 1. Lampirkan ERD dimensional model.
 2. Lampirkan relasi antar dimension dan fact.
 3. Lampirkan screenshot struktur schema final di database.
@@ -105,22 +104,20 @@ Urutan workflow:
 3. Alerting/error capture menggunakan sentry-sdk.
 
 ### Execution Commands
-[BUKTI WAJIB]
 1. Perintah extract-load:
 	- .\.venv\Scripts\python.exe -m luigi --module pipeline.extract_load RunAllExtractLoad --local-scheduler
 2. Perintah transform dan test:
 	- Set-Location .\pactravel_dwh
 	- ..\.venv\Scripts\dbt.exe parse
 	- ..\.venv\Scripts\dbt.exe build --full-refresh
-3. Lampirkan screenshot log sukses untuk Luigi dan dbt.
+3. screenshot log sukses 
 
 ## Step 4 - Show Results of the Pipeline
 
 ### A. Proof that ELT Runs Successfully
-[BUKTI WAJIB]
-1. Lampirkan output terminal sukses Luigi run.
-2. Lampirkan output terminal sukses dbt run/build.
-3. Lampirkan output terminal sukses dbt test.
+1. output terminal sukses Luigi run.
+2. terminal sukses dbt run/build.
+3. output terminal sukses dbt test.
 
 ### B. Proof Data Loaded into Final Tables
 Contoh query:
@@ -164,10 +161,9 @@ ORDER BY full_date
 LIMIT 30;
 ```
 
-[BUKTI WAJIB]
-1. Tempel output query daily volume flights.
-2. Tempel output query daily volume hotels.
-3. Tempel output query average ticket price over time.
+1. output query daily volume flights.
+2. output query daily volume hotels.
+3. output query average ticket price over time.
 
 ### D. Data Quality and Sanity Checks
 Contoh query sanity:
@@ -186,9 +182,7 @@ FROM final.fct_hotel_bookings
 WHERE check_out_date_key IS NULL;
 ```
 
-[BUKTI WAJIB]
-1. Tempel output query sanity check.
-2. Jelaskan jika ada nilai null dan tindakan perbaikannya.
+1. output query sanity check.
 
 
 
