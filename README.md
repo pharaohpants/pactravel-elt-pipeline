@@ -12,14 +12,9 @@ Project ini bertujuan untuk:
 ## Step 1 - Requirements Gathering
 
 ### Data Source
-Data berasal dari domain PacTravel dengan entitas:
-1. aircrafts
-2. airlines
-3. airports
-4. customers
-5. hotel
-6. flight_bookings
-7. hotel_bookings
+Data berasal dari : https://github.com/Kurikulum-Sekolah-Pacmann/pactravel-dataset.git 
+
+dengan ERD : 
 
 ### Description
 Data mencerminkan aktivitas perjalanan customer pada pemesanan tiket pesawat dan hotel. Setiap transaksi booking memiliki atribut waktu, customer, dan atribut operasional lain yang relevan untuk analisis tren.
@@ -39,7 +34,7 @@ Solusi yang diimplementasikan:
 
 ## Step 2 - Designing Data Warehouse Model
 
-### Select Business Process
+### Business Process
 Business process utama:
 1. Flight booking transaction.
 2. Hotel booking transaction.
@@ -77,6 +72,7 @@ Strategi SCD pada dim_customers:
 3. Versi lama ditutup dengan is_current = false.
 
 ### ERD and Model Diagram
+[BUKTI WAJIB]
 1. Lampirkan ERD dimensional model.
 2. Lampirkan relasi antar dimension dan fact.
 3. Lampirkan screenshot struktur schema final di database.
@@ -98,11 +94,6 @@ Urutan workflow:
 3. Transform staging menjadi dimension dan fact di schema final.
 4. Jalankan dbt test untuk validasi kualitas data.
 
-### Scheduling and Alerting
-1. Scheduler harian menggunakan Python schedule.
-2. Logging menggunakan loguru.
-3. Alerting/error capture menggunakan sentry-sdk.
-
 ### Execution Commands
 1. Perintah extract-load:
 	- .\.venv\Scripts\python.exe -m luigi --module pipeline.extract_load RunAllExtractLoad --local-scheduler
@@ -110,14 +101,15 @@ Urutan workflow:
 	- Set-Location .\pactravel_dwh
 	- ..\.venv\Scripts\dbt.exe parse
 	- ..\.venv\Scripts\dbt.exe build --full-refresh
-3. screenshot log sukses 
+3. Lampirkan screenshot log sukses untuk Luigi dan dbt.
 
-## Step 4 - Show Results of the Pipeline
+## Step 4 Results of the Pipeline
 
 ### A. Proof that ELT Runs Successfully
-1. output terminal sukses Luigi run.
-2. terminal sukses dbt run/build.
-3. output terminal sukses dbt test.
+[BUKTI WAJIB]
+1. Lampirkan output terminal sukses Luigi run.
+2. Lampirkan output terminal sukses dbt run/build.
+3. Lampirkan output terminal sukses dbt test.
 
 ### B. Proof Data Loaded into Final Tables
 Contoh query:
@@ -161,9 +153,10 @@ ORDER BY full_date
 LIMIT 30;
 ```
 
-1. output query daily volume flights.
-2. output query daily volume hotels.
-3. output query average ticket price over time.
+[BUKTI WAJIB]
+1. Tempel output query daily volume flights.
+2. Tempel output query daily volume hotels.
+3. Tempel output query average ticket price over time.
 
 ### D. Data Quality and Sanity Checks
 Contoh query sanity:
@@ -182,7 +175,9 @@ FROM final.fct_hotel_bookings
 WHERE check_out_date_key IS NULL;
 ```
 
-1. output query sanity check.
+[BUKTI WAJIB]
+1. Tempel output query sanity check.
+2. Jelaskan jika ada nilai null dan tindakan perbaikannya.
 
 
 
