@@ -124,6 +124,7 @@ Daily booking volume:
 
 
 Average ticket price over time:
+
 <img width="362" height="667" alt="image" src="https://github.com/user-attachments/assets/5e203944-2657-4dfc-ab61-6b7c0615643a" />
 
 
