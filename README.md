@@ -74,10 +74,8 @@ Strategi SCD pada dim_customers:
 3. Versi lama ditutup dengan is_current = false.
 
 ### ERD and Model Diagram
-[BUKTI WAJIB]
-1. Lampirkan ERD dimensional model.
-2. Lampirkan relasi antar dimension dan fact.
-3. Lampirkan screenshot struktur schema final di database.
+
+<img width="1231" height="1243" alt="image" src="https://github.com/user-attachments/assets/4f7b00e5-6b42-470d-8bf6-12a0b3454c60" />
 
 ## Step 3 - Data Pipeline Implementation
 
@@ -130,6 +128,7 @@ Average ticket price over time:
 
 
 ### D. Data Quality and Sanity Checks
+
 <img width="442" height="496" alt="image" src="https://github.com/user-attachments/assets/23e6da55-794a-4f74-8973-abeb79eea56f" />
 
 
