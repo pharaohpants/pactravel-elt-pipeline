@@ -15,6 +15,8 @@ Project ini bertujuan untuk:
 Data berasal dari : https://github.com/Kurikulum-Sekolah-Pacmann/pactravel-dataset.git 
 
 dengan ERD : 
+<img width="973" height="743" alt="image" src="https://github.com/user-attachments/assets/20a66c2b-841d-4044-8122-bd8c533bee54" />
+
 
 ### Description
 Data mencerminkan aktivitas perjalanan customer pada pemesanan tiket pesawat dan hotel. Setiap transaksi booking memiliki atribut waktu, customer, dan atribut operasional lain yang relevan untuk analisis tren.
@@ -87,7 +89,10 @@ Komponen pipeline:
 4. dbt untuk transformasi dan testing.
 5. Scheduler dan alerting menggunakan schedule, loguru, dan sentry-sdk.
 
-### Workflow
+### Workflow 
+
+<img width="2848" height="2621" alt="image" src="https://github.com/user-attachments/assets/8ae5ac3d-db14-4172-b6a3-f7887697e227" />
+
 Urutan workflow:
 1. Extract data dari source DB.
 2. Load data ke schema staging pada DWH.
@@ -105,79 +110,28 @@ Urutan workflow:
 
 ## Step 4 Results of the Pipeline
 
-### A. Proof that ELT Runs Successfully
-[BUKTI WAJIB]
-1. Lampirkan output terminal sukses Luigi run.
-2. Lampirkan output terminal sukses dbt run/build.
-3. Lampirkan output terminal sukses dbt test.
+### A. ELT Runs Successfully
+<img width="842" height="572" alt="image" src="https://github.com/user-attachments/assets/22ac23bb-3a50-4cdf-a3b4-192bab5c5dfd" />
+<img width="862" height="627" alt="image" src="https://github.com/user-attachments/assets/c4082589-d403-4db1-8104-ee6cf4dc9f77" />
 
-### B. Proof Data Loaded into Final Tables
-Contoh query:
 
-```sql
-SELECT table_name
-FROM information_schema.tables
-WHERE table_schema = 'final'
-ORDER BY table_name;
+### B. Data Loaded into Final Tables
+<img width="417" height="320" alt="image" src="https://github.com/user-attachments/assets/a892f41d-f5df-431c-9efb-f1ebbee4d8cc" />
 
-SELECT COUNT(*) AS rows_fct_flight_bookings FROM final.fct_flight_bookings;
-SELECT COUNT(*) AS rows_fct_hotel_bookings  FROM final.fct_hotel_bookings;
-SELECT COUNT(*) AS rows_daily_flights       FROM final.fct_daily_flights_summary;
-SELECT COUNT(*) AS rows_daily_hotels        FROM final.fct_daily_hotels_summary;
-```
 
-[BUKTI WAJIB]
-1. Tempel output query jumlah baris setiap tabel.
-
-### C. Proof Business Requirement Coverage
+### C. Business Requirement Coverage
 Daily booking volume:
 
-```sql
-SELECT full_date, total_bookings
-FROM final.fct_daily_flights_summary
-ORDER BY full_date
-LIMIT 30;
+<img width="398" height="673" alt="image" src="https://github.com/user-attachments/assets/f604b5c1-37e8-4de5-a378-03cd52ac1ba5" />
 
-SELECT full_date, total_bookings
-FROM final.fct_daily_hotels_summary
-ORDER BY full_date
-LIMIT 30;
-```
 
 Average ticket price over time:
+<img width="362" height="667" alt="image" src="https://github.com/user-attachments/assets/5e203944-2657-4dfc-ab61-6b7c0615643a" />
 
-```sql
-SELECT full_date, avg_ticket_price
-FROM final.fct_daily_flights_summary
-ORDER BY full_date
-LIMIT 30;
-```
-
-[BUKTI WAJIB]
-1. Tempel output query daily volume flights.
-2. Tempel output query daily volume hotels.
-3. Tempel output query average ticket price over time.
 
 ### D. Data Quality and Sanity Checks
-Contoh query sanity:
+<img width="442" height="496" alt="image" src="https://github.com/user-attachments/assets/23e6da55-794a-4f74-8973-abeb79eea56f" />
 
-```sql
-SELECT COUNT(*) AS null_flight_date_key
-FROM final.fct_flight_bookings
-WHERE date_key IS NULL;
-
-SELECT COUNT(*) AS null_hotel_check_in_date_key
-FROM final.fct_hotel_bookings
-WHERE check_in_date_key IS NULL;
-
-SELECT COUNT(*) AS null_hotel_check_out_date_key
-FROM final.fct_hotel_bookings
-WHERE check_out_date_key IS NULL;
-```
-
-[BUKTI WAJIB]
-1. Tempel output query sanity check.
-2. Jelaskan jika ada nilai null dan tindakan perbaikannya.
 
 
 
